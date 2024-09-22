@@ -49,7 +49,7 @@ const Doctors = () => {
           {
             filterDoc.map((item,index)=>(
               <div className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500' 
-                  onClick={()=>navigate(`/appintment/${item._id}`)} 
+                  onClick={()=>navigate(`/appointment/${item._id}`)} 
                   key={index}
               >
                   <img className='bg-blue-50' src={item.image} alt="" />
