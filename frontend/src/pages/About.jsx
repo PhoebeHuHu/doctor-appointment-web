@@ -24,7 +24,7 @@ const About = () => {
       </div>
       {/* about */}
       <div className='flex my-10 flex-col md:flex-row gap-12'>
-        <img src={assets.about_image} alt="about" className='w-full md:max-w-[360px]' />
+        <img src={assets.about_image} alt="about" className='w-full md:max-w-[360px] h-auto block object-contain' />
         <div className='flex flex-col justify-center gap-6 md:w-1/2 text-sm text-gray-600'>
           <p>Welcome to Prescripto, your trusted partner in managing your healthcare needs conveniently and efficiently. At Prescripto, we understand the challenges individuals face when it comes to scheduling doctor appointments and managing their health records.</p>
           <p>Prescripto is committed to excellence in healthcare technology. We continuously strive to enhance our platform, integrating the latest advancements to improve user experience and deliver superior service. Whether you're booking your first appointment or managing ongoing care, Prescripto is here to support you every step of the way</p>
