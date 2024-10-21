@@ -6,6 +6,7 @@ const Doctors = () => {
   const { speciality } = useParams()
   const {doctors} = useContext(AppContext)
   const [filterDoc, setFilterDoc] = useState([])
+  const [showFilters, setShowFilters] = useState(false)
   const navigate = useNavigate()
   const FILTER_TABLE = [
     {filter:'General physician'},
@@ -16,6 +17,15 @@ const Doctors = () => {
     {filter:'Gastroenterologist'},
   ]
 
+  const styles ={
+    content_wrapper:'flex flex-col sm:flex-row items-start gap-5 mt-5',
+    filter_btn:'py-1 px-3 border border-primary rounded text-sm transition-all sm:hidden',
+    filters_wrapper:'flex flex-col w-full sm:w-auto gap-2 sm:gap-4 text-sm text-gray-600',
+    filter:'w-full sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer',
+    docters_wrapper:'w-full grid grid-cols-auto gap-4 gap-y-6',
+    docter_container:'border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500'
+  }
+  
   const applyFilter = ()=>{
     if (speciality) {
       setFilterDoc(doctors.filter(doctor => doctor.speciality === speciality))
@@ -35,20 +45,21 @@ const Doctors = () => {
   return (
     <div>
       <p className='text-gray-600'>Browse through the doctors specialist.</p>
-      <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>
-        <div className='flex flex-row sm:flex-col gap-4 text-sm text-gray-600'>
+      <div className={styles.content_wrapper}>
+        <button className={`${showFilters?'bg-primary text-white':''} ${styles.filter_btn}`} onClick={()=>setShowFilters(prev => !prev)}>Filters</button>
+        <div className={`${showFilters?'':'hidden'} ${styles.filters_wrapper}`}>
           {/* menu */}
           {
             FILTER_TABLE.map((item,index)=>(
-              <p onClick={()=>filterOnClick(item.filter)} key={index} className={`w-[94px] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === item.filter ? "bg-indigo-50 text-black":""} `}>{item.filter}</p>
+              <p onClick={()=>filterOnClick(item.filter)} key={index} className={`${speciality === item.filter ? "bg-indigo-50 text-black":""} ${styles.filter}`}>{item.filter}</p>
             ))
           }
         </div>
-        <div className='w-full grid grid-cols-auto gap-4 gap-y-6'>
+        <div className={styles.docters_wrapper}>
           {/* doctors */}
           {
             filterDoc.map((item,index)=>(
-              <div className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500' 
+              <div className= {styles.docter_container}
                   onClick={()=>navigate(`/appointment/${item._id}`)} 
                   key={index}
               >
